@@ -1,0 +1,16 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongoatlas": {
+    "host": "@cluster0-shard-00-00-wewk8.mongodb.net",
+    "port": 27017,
+    "url": "mongodb+srv://MemberAuth:xFRVGRRXBA0zc7V2@cluster0-wewk8.mongodb.net/test?retryWrites=true&w=majority",
+    "database": "test",
+    "password": "xFRVGRRXBA0zc7V2",
+    "name": "mongoatlas",
+    "user": "MyMongoDBUser",
+    "connector": "mongodb"
+  }
+}

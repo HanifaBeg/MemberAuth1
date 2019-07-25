@@ -1,0 +1,91 @@
+Skip to content
+
+Please note that GitHub no longer supports your web browser.
+We recommend upgrading to the latest Google Chrome or Firefox.
+Ignore
+Learn more
+Why GitHub? 
+Enterprise
+Explore 
+Marketplace
+Pricing 
+
+Search
+
+Sign in
+Sign up
+ Watch 51  Star 360  Fork 177 strongloop/loopback-example-access-control
+ Code  Issues 2  Pull requests 1  Projects 0  Security  Insights
+Dismiss
+All your code in one place
+GitHub makes it easy to scale back on context switching. Read rendered documentation, see the history of any file, and collaborate with contributors on projects across GitHub.
+
+Sign up for free  See pricing for teams and enterprises
+Branch: master 
+loopback-example-access-control/server/boot/role-resolver.js
+Find file Copy path
+@agnes512 agnes512 chore: update copyrights years
+01f8f98 May 7, 2019
+3 contributors
+@rmg @cgole @agnes512
+47 lines (39 sloc)  1.17 KB
+RawBlameHistory
+    
+// Copyright IBM Corp. 2015,2017. All Rights Reserved.
+// Node module: loopback-example-access-control
+// This file is licensed under the MIT License.
+// License text available at https://opensource.org/licenses/MIT
+
+module.exports = function(app) {
+  var Role = app.models.Role;
+
+  Role.registerResolver('teamMember', function(role, context, cb) {
+    function reject() {
+      process.nextTick(function() {
+        cb(null, false);
+      });
+    }
+
+    // if the target model is not project
+    if (context.modelName !== 'project') {
+      return reject();
+    }
+
+    // do not allow anonymous users
+    var userId = context.accessToken.userId;
+    if (!userId) {
+      return reject();
+    }
+
+    // check if userId is in team table for the given project id
+    context.model.findById(context.modelId, function(err, project) {
+      if (err || !project)
+        return reject();
+
+      var Team = app.models.Team;
+      Team.count({
+        ownerId: project.ownerId,
+        memberId: userId
+      }, function(err, count) {
+        if (err) {
+          console.log(err);
+          return cb(null, false);
+        }
+
+        cb(null, count > 0); // true = is a team member
+      });
+    });
+  });
+};
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
