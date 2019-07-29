@@ -1,0 +1,27 @@
+{
+  "name": "MemberRole",
+  "plural": "MemberRoles",
+  "base": "Role",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "principals": {
+      "type": "hasMany",
+      "model": "Member",
+      "foreignKey": "RoleId",
+      "through": "RoleMemberMapping",
+      "keyThrough": "MemberId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
