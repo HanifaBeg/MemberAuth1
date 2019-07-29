@@ -1,43 +1,51 @@
 {
-    "_meta": {
-        "sources": [
-      "loopback/common/models"
-      , "loopback/server/models"
-      , "../common/models"
-      , "./models"
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
     ]
-        , "mixins": [
-      "loopback/common/mixins"
-      , "loopback/server/mixins"
-      , "../common/mixins"
-      , "./mixins"
-    ]
+  },
+  "User": {
+    "dataSource": "mongoatlas",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "mongoatlas",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongoatlas",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongoatlas",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
     }
-    , "User": {
-        "dataSource": "mongoatlas"
-        , "public": false
-    }
-    , "AccessToken": {
-        "dataSource": "mongoatlas"
-        , "public": false
-    }
-    , "ACL": {
-        "dataSource": "mongoatlas"
-        , "public": false
-    }
-    , "RoleMapping": {
-        "dataSource": "mongoatlas"
-        , "public": false
-        , "options": {
-            "strictObjectIDCoercion": true
-        }
-    }
-    , "Role": {
-        "dataSource": "mongoatlas"
-        , "public": false
-    }
-    , "Member": {
-        "dataSource": "mongoatlas"
-        , "public": true
-    }
+  },
+  "Role": {
+    "dataSource": "mongoatlas",
+    "public": false
+  },
+  "Member": {
+    "dataSource": "mongoatlas",
+    "public": true
+  },
+  "MemberRole": {
+    "dataSource": "mongoatlas",
+    "public": false
+  },
+  "RoleMemberMapping": {
+    "dataSource": "mongoatlas",
+    "public": false
+  }
 }
